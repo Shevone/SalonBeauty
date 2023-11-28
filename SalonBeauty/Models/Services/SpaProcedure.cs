@@ -36,6 +36,6 @@ public class SpaProcedure : Service
 
     public override string DisplayInfo()
     {
-        return $"Спа процедура : {Name} | Цена : {Price} | Время работы : {ProcedureTimeMinutes}";
+        return $"id : {Id} | Спа процедура : {Name} | Цена : {Price} | Время работы : {ProcedureTimeMinutes}";
     }
 }

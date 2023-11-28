@@ -11,6 +11,6 @@ public class Hairstyle : Service
 
     public override string DisplayInfo()
     {
-        return $"Работа с волосами {Name} | Цена {Price} | Включает мойку волос : {_includesWash}";
+        return $"id : {Id} | Работа с волосами {Name} | Цена {Price} | Включает мойку волос : {_includesWash}";
     }
 }

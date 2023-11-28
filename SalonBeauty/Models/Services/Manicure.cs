@@ -11,6 +11,6 @@ public class Manicure : Service
 
     public override string DisplayInfo()
     {
-        return $"Маникюр : {Name} | Цена : {Price} | Цвет : {_color}";
+        return $"id : {Id} |Маникюр : {Name} | Цена : {Price} | Цвет : {_color}";
     }
 }

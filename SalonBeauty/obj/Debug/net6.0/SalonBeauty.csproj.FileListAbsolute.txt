@@ -1,0 +1,15 @@
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\bin\Debug\net6.0\SalonBeauty.exe
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\bin\Debug\net6.0\SalonBeauty.deps.json
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\bin\Debug\net6.0\SalonBeauty.runtimeconfig.json
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\bin\Debug\net6.0\SalonBeauty.dll
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\bin\Debug\net6.0\SalonBeauty.pdb
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.csproj.AssemblyReference.cache
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.GeneratedMSBuildEditorConfig.editorconfig
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.AssemblyInfoInputs.cache
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.AssemblyInfo.cs
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.csproj.CoreCompileInputs.cache
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.dll
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\refint\SalonBeauty.dll
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.pdb
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\SalonBeauty.genruntimeconfig.cache
+D:\univer\3course\1sem\c#_net\SalonBeauty\SalonBeauty\obj\Debug\net6.0\ref\SalonBeauty.dll

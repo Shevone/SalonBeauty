@@ -11,7 +11,7 @@ public class Order
     private List<Service> _services; // Список желаемых услуг
     
     // Свойство, которое будет возвращает сумму заказа
-    private double SumPrice
+    public double SumPrice
     {
         get
         {
@@ -32,11 +32,16 @@ public class Order
         _nextTd++;
         _dateTime = DateTime.Now;
         _services = services;
+        // Записываем +1 в каждуйю услугу к заказу
+        foreach (Service service in services)
+        {
+            service.OrderOneService();
+        }
     }
     // Метод определяющий то как выгляит в виде строки
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder($"Заказ №{Id}. Время заказа {_dateTime}. Цена заказа {SumPrice}");
+        StringBuilder sb = new StringBuilder($"Заказ №{Id}. Время заказа {_dateTime}. Цена заказа {SumPrice}\n");
         foreach (Service service in _services)
         {
             sb.Append(service.DisplayInfo() + "\n");

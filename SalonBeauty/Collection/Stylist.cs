@@ -26,7 +26,7 @@ public class Stylist<T> : ICollection<T> where T : Service
     }
     public int Count => _serviceList.Count; // Количесвто элементов(количесвто предоставляемых услуг)
     public bool IsReadOnly => false; // Просто  загулушка
-    public string ServiceType => typeof(T).ToString()[23..]; // тип выполняемых услуг (прическа, маникюр, спа)
+    public string ServiceType => typeof(T).ToString()[19..]; // тип выполняемых услуг (прическа, маникюр, спа)
     
     // =============================================
     public Stylist(string name)
@@ -88,7 +88,7 @@ public class Stylist<T> : ICollection<T> where T : Service
     public string DisplayInfo()
     {
         // Метод возвращающий подробную информацию, в строковом виде
-        StringBuilder sb = new StringBuilder($"Стилист {_name} | Тип услуг : {ServiceType} | Количесвто услуг {Count}\n | Зарплата {Salary}");
+        StringBuilder sb = new StringBuilder($"Стилист {_name} | Тип услуг : {ServiceType} | Количесвто услуг {Count} | Зарплата {Salary}\n");
         // Проходимся по предоставляемым услугам и записываем их в нашу строку
         foreach (T service in _serviceList)
         {

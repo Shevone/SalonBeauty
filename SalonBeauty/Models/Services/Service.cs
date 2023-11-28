@@ -3,6 +3,8 @@
 // Класс - услуга
 public abstract class Service
 {
+    private static int _id = 1;// статическое поле id - доступно для всех объектов этого класса
+    public int Id { get; } // get - можно только получить
     protected string Name; // Поле в котором хранится имя
     private double _price; // Поле в котором хранится цен
 
@@ -35,6 +37,8 @@ public abstract class Service
     // Модификатор доступа protected - значит что доступен только в классах наследниках
     protected Service(string name, double price)
     {
+        Id = _id;
+        _id++;
         Name = name;
         Price = price;
     }

@@ -10,6 +10,6 @@ public class Pedicure : Service
     }
     public override string DisplayInfo()
     {
-        return $"id : {Id} |Педикюр : {Name} | Цена : {Price} | Тип педикюра : {_type}";
+        return $"id : {Id} |Педикюр : {Name} | Цена : {Price} | Тип педикюра : {_type} | Количество заказов : {OrderCount}";
     }
 }

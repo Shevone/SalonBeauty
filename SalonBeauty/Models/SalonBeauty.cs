@@ -3,10 +3,10 @@
 public class SalonBeauty
 {
     // Всего в салоне у нас 3 стиллиста
-    private Stylist<Hairstyle> hairdresser = new Stylist<Hairstyle>("Иван"); // Парикмахер
-    private Stylist<Manicure> manicurist = new Stylist<Manicure>("Анна"); // Маникюрщица
-    private Stylist<SpaProcedure> spaExpert = new Stylist<SpaProcedure>("Аркадий"); // Эксперт по спа процедурам
-    private Stylist<Pedicure> pedicureExpert = new Stylist<Pedicure>("Ирина"); // Эксперт по педикюру
+    private IStylist<Hairstyle> hairdresser = new Stylist<Hairstyle>("Иван"); // Парикмахер
+    private IStylist<Manicure> manicurist = new Stylist<Manicure>("Анна"); // Маникюрщица
+    private IStylist<SpaProcedure> spaExpert = new Stylist<SpaProcedure>("Аркадий"); // Эксперт по спа процедурам
+    private IStylist<Pedicure> pedicureExpert = new Stylist<Pedicure>("Ирина"); // Эксперт по педикюру
 
     // свойство, которое переводит информацию об экспертах и услугах в строку и возвращает
     public string StylistsSting
@@ -78,4 +78,43 @@ public class SalonBeauty
     {
         _orders.Add(appointment);
     }
+    // Метод который решает каким образом будет происходить сортировка
+    public void SortServices(ServiceSortType serviceSortType)
+    {
+        // Объявляем переменную, которая будет содердать в себе - метод сортировки
+        Func<Service, Service, bool> compareFunc;
+        // Далее проходися по входному параметру
+        // в зависимости от того по какому параметру выбрано сортировать данные - выбираем опрделенный метод сравнения
+        // из наших статических методов, определенных в классе Service
+        switch (serviceSortType)
+        {
+            case ServiceSortType.Name :
+                compareFunc = Service.CompareByName;
+                break;
+            case ServiceSortType.Price:
+                compareFunc = Service.CompareByPrice;
+                break;
+            case ServiceSortType.OrderCount:
+                compareFunc = Service.CompareByOrderCount;
+                break;
+            default:
+                // Елси что то не то передали то просто выходим
+                return;
+        }
+        // Далее мы вызываем метод сортировки и всех специалистов
+        hairdresser.SortServices(compareFunc);
+        manicurist.SortServices(compareFunc);
+        pedicureExpert.SortServices(compareFunc);
+        spaExpert.SortServices(compareFunc);
+        // Теперь услуги, записанные у специалистов отсортированны по выбраному параметру
+        
+    }
 }
+// Перечисление - тип сортировки
+public enum ServiceSortType
+{
+    Name,
+    Price,
+    OrderCount,
+}
+

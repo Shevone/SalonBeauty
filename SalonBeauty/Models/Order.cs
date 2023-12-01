@@ -8,8 +8,8 @@ public class Order
     private static int _nextTd = 1;
     private int Id;
     private DateTime _dateTime; // Время когда оформлен заказ
-    private List<Service> _services; // Список желаемых услуг
-    
+    private Dictionary<Service,int> _services; // Список желаемых услуг
+
     // Свойство, которое будет возвращает сумму заказа
     public double SumPrice
     {
@@ -17,9 +17,9 @@ public class Order
         {
             double sum = 0;
             // Проходимся по элементно и суммирум цену всех услуг в заказе
-            foreach (Service service in _services)
+            foreach (KeyValuePair<Service, int> keyValuePair in _services)
             {
-                sum += service.Price;
+                sum += keyValuePair.Key.Price * keyValuePair.Value;
             }
             return sum;
         }
@@ -31,10 +31,16 @@ public class Order
         Id = _nextTd;
         _nextTd++;
         _dateTime = DateTime.Now;
-        _services = services;
+        _services = new Dictionary<Service, int>();
         // Записываем +1 в каждуйю услугу к заказу
         foreach (Service service in services)
         {
+            if (!_services.ContainsKey(service))
+            {
+                _services.Add(service,0);
+            }
+
+            _services[service]++;
             service.OrderOneService();
         }
     }
@@ -42,9 +48,9 @@ public class Order
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder($"Заказ №{Id}. Время заказа {_dateTime}. Цена заказа {SumPrice}\n");
-        foreach (Service service in _services)
+        foreach (KeyValuePair<Service, int> keyValuePair in _services)
         {
-            sb.Append(service.DisplayInfo() + "\n");
+            sb.Append(keyValuePair.Key.DisplayInfo() + $" | В данном заказе : {keyValuePair.Value}\n");
         }
 
         return sb.ToString();

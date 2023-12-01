@@ -70,7 +70,7 @@ public abstract class Service
         // 0 - равны
         // -1 - второй больше первого
        
-        int res = service1.OrderCount.CompareTo(service2.OrderCount);
+        int res = service1.Price.CompareTo(service2.Price);
         if (res > 0)
         {
             return true;

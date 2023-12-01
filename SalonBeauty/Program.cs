@@ -57,7 +57,8 @@ class Program
                               "2 - Созадть заказ\n" +
                               "3 - Просмотр услгу(Мастеров)\n" +
                               "4 - Просмотр заказов\n" +
-                              "5 - Выход");
+                              "5 - Сортировка\n" +
+                              "6 - Выход");
             // Вопросики - если оставили пустю строку
             string index = Console.ReadLine() ?? "";
             switch (index)
@@ -87,6 +88,10 @@ class Program
                     Console.WriteLine($"Суммарная цена заказов : {Salon.OrderSumPrice}");
                     break;
                 case "5":
+                    // Сортировка
+                    Sorting();
+                    break;
+                case "6":
                     // Выход
                     Console.WriteLine("Выбран выход");
                     exitFlag = true;
@@ -95,6 +100,35 @@ class Program
 
             Console.WriteLine("Чтобы продолжить нажмите любую кнопку");
             Console.ReadKey();
+        }
+    }
+
+    private static void Sorting()
+    {
+        Console.WriteLine("Введите цифру чтоб отсортировать услуги у мастеров по:\n" +
+                          "1 - Названию\n" +
+                          "2 - Цене\n" +
+                          "3 - Количеству заказов\n" +
+                          "Для выхода введите люую строку\n");
+        string index = Console.ReadLine() ?? "";
+        // Считываем строку и смотрим что было выбрано
+        switch (index)
+        {
+            default:
+                Console.Write("Ничего не выбрано");
+                return;
+            case "1":
+                Salon.SortServices(ServiceSortType.Name);
+                Console.WriteLine("Произведена сортировка по названию услуг");
+                break;
+            case "2":
+                Salon.SortServices(ServiceSortType.Price);
+                Console.WriteLine("Произведена сортировка по цене услуг");
+                break;
+            case "3":
+                Salon.SortServices(ServiceSortType.OrderCount);
+                Console.WriteLine("Произведена сортировка по количеству заказов услуг");
+                break;
         }
     }
 

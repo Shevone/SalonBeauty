@@ -46,8 +46,7 @@ public abstract class Service
     public abstract string DisplayInfo();
     // ==================================================================
     // Статические методы(не требующие объекты класса), которые сравнивают элемнты
-    // Возвращают true, если первый элемент больше воторого
-    public static bool CompareByName(Service service1, Service service2)
+    public static int CompareByName(Service service1, Service service2)
     {
         // Метод сравнения 2х объектов по названию
         // возвращает true если первый элемент больше второго
@@ -56,41 +55,29 @@ public abstract class Service
         // -1 - второй больше первого
        
         int res = string.Compare(service1.Name, service2.Name, StringComparison.Ordinal);
-        if (res > 0)
-        {
-            return true;
-        }
-        return false;
+        return res;
     }
-    public static bool CompareByPrice(Service service1, Service service2)
+    public static int CompareByPrice(Service service1, Service service2)
     {
-        // Метод сравнения 2х объектов по wцене
+        // Метод сравнения 2х объектов по цене
         // возвращает true если первый элемент больше второго
         // CompareTo возвращает 1- сли первый больше второ
         // 0 - равны
         // -1 - второй больше первого
        
         int res = service1.Price.CompareTo(service2.Price);
-        if (res > 0)
-        {
-            return true;
-        }
-        return false;
+        return res;
     }
-    public static bool CompareByOrderCount(Service service1, Service service2)
+    public static int CompareByOrderCount(Service service1, Service service2)
     {
-        // Метод сравнения 2х объектов по wцене
+        // Метод сравнения 2х объектов по количеству закозв
         // возвращает true если первый элемент больше второго
         // CompareTo возвращает 1- сли первый больше второ
         // 0 - равны
         // -1 - второй больше первого
 
         int res = service1.OrderCount.CompareTo(service2.OrderCount);
-        if (res > 0)
-        {
-            return true;
-        }
-        return false;
+        return res;
     }
     
 }

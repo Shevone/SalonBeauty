@@ -82,7 +82,7 @@ public class SalonBeauty
     public void SortServices(ServiceSortType serviceSortType)
     {
         // Объявляем переменную, которая будет содердать в себе - метод сортировки
-        Func<Service, Service, bool> compareFunc;
+        Func<Service, Service, int> compareFunc;
         // Далее проходися по входному параметру
         // в зависимости от того по какому параметру выбрано сортировать данные - выбираем опрделенный метод сравнения
         // из наших статических методов, определенных в классе Service

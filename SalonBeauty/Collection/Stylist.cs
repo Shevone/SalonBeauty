@@ -128,26 +128,11 @@ public class Stylist<T> : ICovarianceInterface<T>, IStylist<T> where T : Service
     // Метод сортировки
     // Принимает в качестве входного параметра - делегат Func
     // последний параметр в кавычках - тип, который возвращает наш делеагт
-    // Реализовывает пузырьковую сортирвку
     // Сравнение элементов происходит функцией переданной в качестве входного параметра
-    public void SortServices(Func<T, T, bool> orderFunc)
+    public void SortServices(Func<T, T, int> orderFunc)
     {
-        var len = Count;
-        for (var i = 1; i < len; i++)
-        {
-            for (var j = 0; j < len - i; j++)
-            {
-                // Помещаем 2 параметра в функцию сравнения
-                // Если первый больше второго, то меняем их местами
-                T p1 = _serviceList[j];
-                T p2 = _serviceList[j + 1];
-                bool firstBiggerThanSecond = orderFunc(p1, p2); // Тут вызываем переданный делеагт сравнения
-                // и если первый больше второго, то меняем элементы меставим
-                if(firstBiggerThanSecond)
-                {
-                    (_serviceList[j], _serviceList[j + 1]) = (_serviceList[j + 1], _serviceList[j]);
-                }
-            }
-        }
+        // Вызываем у списка услуг встроенный метод сортировки,
+        // передавая в него функци таким вот образом
+        _serviceList.Sort((fish1, fish2) => orderFunc(fish1, fish2));
     }
 }

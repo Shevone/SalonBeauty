@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.SymbolStore;
+using SalonBeauty.Logging;
 using SalonBeauty.Models;
 
 namespace SalonBeauty;
@@ -44,6 +45,15 @@ class Program
 
     public static void Main(string[] args)
     {
+        // Создадим логер и зарегистрируем в нем методы
+        Logger logger = new Logger();
+        // Указываем отсносительный путь до файла
+        PrintMethods printMethods = new PrintMethods("\\Log.txt");
+        
+        logger.AddLogPrintMethod(printMethods.ConsoleLog);
+        logger.AddLogPrintMethod(printMethods.FileLog);
+        
+        logger.LogInfo("Старт программы");
         // Вызов метода для заполнения салона
         FillTheSalon();
         // Вызов мтеода для демонстрации контрвариантности
@@ -61,22 +71,34 @@ class Program
                               "6 - Выход");
             // Вопросики - если оставили пустю строку
             string index = Console.ReadLine() ?? "";
+            string message;
             switch (index)
             {
                 default:
-                    Console.WriteLine("Вы ничего не выбрали");
+                    
+                    logger.LogInfo("Взаимодействие с меню - Выбран не существующий пункт меню");
+                    
                     break;
                 case "1":
                     // Пункт созданаие услуги
-                    CreateService();
+                    message = "Создание новой услуги | " + CreateService();
+                    
+                    logger.LogInfo(message);
+                    
                     break;
                 case "2":
                     // Пункт - создание заказа
-                    CreateOrder();
+                    message = "Оформление заказа | " + CreateOrder();
+                    
+                    logger.LogInfo(message);
+                    
                     break;
                 case "3":
                     // Прсмотр списка услуг(Масттеров)
                     Console.WriteLine(Salon.StylistsSting);
+                    
+                    logger.LogInfo("Просмотрен список услуг(мастеров)");
+                    
                     break;
                 case "4":
                     // Просмотр списка заказов
@@ -84,26 +106,33 @@ class Program
                     {
                         Console.WriteLine(order);
                     }
-
                     Console.WriteLine($"Суммарная цена заказов : {Salon.OrderSumPrice}");
+                    
+                    logger.LogInfo("Просмотрен список заказов");
+                    
                     break;
                 case "5":
                     // Сортировка
-                    Sorting();
+                    message = "Сортировка | " + Sorting();
+                    
+                    logger.LogInfo(message);
+                    
                     break;
                 case "6":
                     // Выход
-                    Console.WriteLine("Выбран выход");
+                    message = "Выбран выход из приложения";
+                    
+                    logger.LogInfo(message);
+                    
                     exitFlag = true;
                     break;
             }
-
-            Console.WriteLine("Чтобы продолжить нажмите любую кнопку");
-            Console.ReadKey();
+            
         }
+        printMethods.FileLog("=======================\n");
     }
 
-    private static void Sorting()
+    private static string Sorting()
     {
         Console.WriteLine("Введите цифру чтоб отсортировать услуги у мастеров по:\n" +
                           "1 - Названию\n" +
@@ -112,27 +141,30 @@ class Program
                           "Для выхода введите люую строку\n");
         string index = Console.ReadLine() ?? "";
         // Считываем строку и смотрим что было выбрано
+        string message;
         switch (index)
         {
             default:
-                Console.Write("Ничего не выбрано");
-                return;
+                message = "Сортировка отменена";
+                break;
             case "1":
                 Salon.SortServices(ServiceSortType.Name);
-                Console.WriteLine("Произведена сортировка по названию услуг");
+                message = ("Произведена сортировка по названию услуг");
                 break;
             case "2":
                 Salon.SortServices(ServiceSortType.Price);
-                Console.WriteLine("Произведена сортировка по цене услуг");
+                message = ("Произведена сортировка по цене услуг");
                 break;
             case "3":
                 Salon.SortServices(ServiceSortType.OrderCount);
-                Console.WriteLine("Произведена сортировка по количеству заказов услуг");
+                message = ("Произведена сортировка по количеству заказов услуг");
                 break;
         }
+
+        return message;
     }
 
-    private static void CreateService()
+    private static string CreateService()
     {
         Console.Clear();
         Console.WriteLine("Введите цифру чтоб выбрать пункт меню\n" +
@@ -143,16 +175,15 @@ class Program
                           "Для выхода введите люую строку\n");
         // Считываем название и цену
         string index = Console.ReadLine() ?? "";
-        if (index != "1" && index != "2" && index != "3" && index != "4") return;
+        if (index != "1" && index != "2" && index != "3" && index != "4") return "при выборе типа услуги введено не корреткное значение";
         Console.WriteLine("Введите название");
         string name = Console.ReadLine() ?? "";
         Console.WriteLine("Введите цену услуги");
         bool parseRes = Double.TryParse(Console.ReadLine() ?? "0", out double result);
         // Если что то ввели не правильно то заказничаваем создание
         if (name == "" || parseRes == false)
-        {
-            Console.WriteLine("^_^");
-            return;
+        { 
+            return "не корректно были введены базовые данные";
         }
 
         // в зависимости от того какой тип выбрали запрашаиваем доп данные
@@ -195,11 +226,10 @@ class Program
                 message = "^_^";
                 break;
         }
-
-        Console.WriteLine(message);
+        return message;
     }
 
-    private static void CreateOrder()
+    private static string CreateOrder()
     {
         // Выводим список всех услуг
         Console.WriteLine("Введите id желаемых услуг черещ пробел");
@@ -237,11 +267,10 @@ class Program
         {
             Order order = new Order(services);
             Salon.AddNewOrder(order);
-            Console.WriteLine("Заказ создан ");
-            return;
+            return $"Создан новый заказ id : {order.Id}";
         }
 
-        Console.WriteLine("Ничего не выбрано");
+        return "При создании заказа не было выбрано услуг(оформление заказа отменено)";
 
     }
 

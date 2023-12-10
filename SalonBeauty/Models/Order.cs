@@ -6,7 +6,7 @@ namespace SalonBeauty.Models;
 public class Order
 {
     private static int _nextTd = 1;
-    private int Id;
+    public int Id { get; }
     private DateTime _dateTime; // Время когда оформлен заказ
     private Dictionary<Service,int> _services; // Список желаемых услуг
 
